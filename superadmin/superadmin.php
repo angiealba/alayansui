@@ -129,7 +129,7 @@
                                 <label for="userPassword" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="userPassword" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Account</button>
+                            <button type="submit" class="btn btn-success">Add Account</button>
                             <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                         </form>
                     </div>
@@ -234,8 +234,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-danger">Save Changes</button>
+                    <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save Changes</button>
             </div>
         </div>
     </div>
