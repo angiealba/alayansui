@@ -148,7 +148,7 @@
         <table class="table table-striped mt-3 align-middle" id="userTable">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <!--<th>ID</th>-->
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -176,13 +176,12 @@
                     $email = $user[1];
                     $role = $user[2];
                     echo "<tr>
-                        <td>$id</td>
                         <td>$name</td>
                         <td>$email</td>
                         <td>$role</td>
                         <td class='action-column'>
                             <div class='action-buttons'>
-                                <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='$id' onclick='editUser($id, \"$name\", \"$email\", \"$role\")'>Edit</button>
+                                <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='$id' onclick='editUser($id, \"$name\", \"$email\", \"$role\")'>Edit</button>
                                 <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteUserModal' data-user-id='$id' onclick='deleteUser($id)'>Delete</button>
                             </div>
                         </td>

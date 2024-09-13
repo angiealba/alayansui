@@ -83,7 +83,7 @@
                             <td><?php echo $room['facilities']; ?></td>
                             <td class='action-column'>
                                 <div class='action-buttons'>
-                                    <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editRoomModal' data-room-id='<?php echo $room['id']; ?>'>Edit</button>
+                                    <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editRoomModal' data-room-id='<?php echo $room['id']; ?>'>Edit</button>
                                     <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteRoomModal' data-room-id='<?php echo $room['id']; ?>'>Delete</button>
                                 </div>
                             </td>

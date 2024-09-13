@@ -28,7 +28,6 @@
             <table class="table table-striped mt-3 align-middle">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th class="action-column">Actions</th>
@@ -73,12 +72,11 @@
     
                         foreach ($paginatedUsers as $user) {
                             echo "<tr>
-                                <td>{$user['id']}</td>
                                 <td>{$user['name']}</td>
                                 <td>{$user['email']}</td>
                                 <td class='action-column'>
                                     <div class='action-buttons'>
-                                        <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='{$user['id']}'>Edit</button>
+                                        <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='{$user['id']}'>Edit</button>
                                         <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteUserModal' data-user-id='{$user['id']}'>Delete</button>
                                     </div>
                                 </td>

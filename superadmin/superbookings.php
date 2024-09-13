@@ -110,7 +110,7 @@
                             <td><?php echo $booking['duration'] . ' ' . ($booking['duration'] > 1 ? 'hours' : 'hour'); ?></td>
                             <td class="action-column">
                                 <div class="action-buttons">
-                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#editBookingModal" data-booking-id="<?php echo $booking['id']; ?>">Edit</button>
+                                    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editBookingModal" data-booking-id="<?php echo $booking['id']; ?>">Edit</button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBookingModal" data-booking-id="<?php echo $booking['id']; ?>">Cancel</button>
                                 </div>
                             </td>

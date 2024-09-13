@@ -64,11 +64,12 @@
     <div class="d-grid gap-2 d-md-flex">
       <button
         type="button"
-        class="btn btn-outline-primary"
+        class="btn btn-success"
         onclick="generateRoomUsageReport()"
       >
         Generate Report
       </button>
+      <!--
       <button
         type="button"
         class="btn btn-secondary"
@@ -76,6 +77,7 @@
       >
         Export
       </button>
+      -->
     </div>
             </div>
           </form>
