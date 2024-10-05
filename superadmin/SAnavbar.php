@@ -13,7 +13,7 @@
                     <a class="nav-link text-light" href="/alayans/superadmin/superusers.php">ACCOUNT MANAGEMENT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="/alayans/superadmin/superrooms.php">ROOMS</a>
+                    <a class="nav-link text-light" href="/alayans/superadmin/superrooms.php">ROOOMS</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/alayans/superadmin/superbookings.php">BOOKINGS</a>
