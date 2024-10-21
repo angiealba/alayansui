@@ -28,7 +28,6 @@
             <table class="table table-striped mt-3 align-middle">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th class="action-column">Actions</th>
@@ -73,12 +72,11 @@
     
                         foreach ($paginatedUsers as $user) {
                             echo "<tr>
-                                <td>{$user['id']}</td>
                                 <td>{$user['name']}</td>
                                 <td>{$user['email']}</td>
                                 <td class='action-column'>
                                     <div class='action-buttons'>
-                                        <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='{$user['id']}'>Edit</button>
+                                        <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='{$user['id']}'>Edit</button>
                                         <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteUserModal' data-user-id='{$user['id']}'>Delete</button>
                                     </div>
                                 </td>
@@ -137,7 +135,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Add User</button>
+                    <button type="button" class="btn btn-success">Add User</button>
                 </div>
             </div>
         </div>
@@ -170,7 +168,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-danger">Save Changes</button>
+                    <button type="button" class="btn btn-success">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -208,7 +206,7 @@
             var modalTitle = editUserModal.querySelector('.modal-title')
             var userIdInput = editUserModal.querySelector('#editUserId')
 
-            modalTitle.textContent = 'Edit User ' + userId
+            modalTitle.textContent = 'Edit User'
             userIdInput.value = userId
 
             // Here you would typically fetch the user data and populate the form
@@ -228,9 +226,9 @@
             var userIdInput = deleteUserModal.querySelector('#deleteUserId')
             var userNameElement = deleteUserModal.querySelector('#deleteUserName')
 
-            modalTitle.textContent = 'Delete User ' + userId
+            modalTitle.textContent = 'Delete User'
             userIdInput.value = userId
-            userNameElement.textContent = 'John Doe' // Replace with actual user name
+            userNameElement.innerHTML = 'Name: John Doe<br>Email: john@doe.com';  // Replace with actual user name
 
             // Here you would typically fetch the user data to display the name
             // For this example, we're using a placeholder name

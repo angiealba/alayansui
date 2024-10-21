@@ -19,11 +19,11 @@
             ['id' => 1, 'name' => 'Boardroom A', 'location' => '1st Floor', 'capacity' => 20, 'facilities' => 'Projector, Whiteboard'],
             ['id' => 2, 'name' => 'Conference Room B', 'location' => '2nd Floor', 'capacity' => 50, 'facilities' => 'Video conferencing, Smart TV'],
             ['id' => 3, 'name' => 'Meeting Room C', 'location' => '3rd Floor', 'capacity' => 10, 'facilities' => 'Whiteboard'],
-            ['id' => 4, 'name' => 'Executive Suite', 'location' => '5th Floor', 'capacity' => 8, 'facilities' => 'Video conferencing, Catering'],
+            ['id' => 4, 'name' => 'Executive Suite', 'location' => '5th Floor', 'capacity' => 8, 'facilities' => 'Video conferencing'],
             ['id' => 5, 'name' => 'Training Room', 'location' => 'Basement', 'capacity' => 30, 'facilities' => 'Projector, Computers'],
         ];
 
-        $facilities = ['Projector', 'Whiteboard', 'Video conferencing', 'Smart TV', 'Catering', 'Computers'];
+        $facilities = ['Projector', 'Whiteboard', 'Video conferencing', 'Smart TV', 'Computers'];
 
         for ($i = 6; $i <= 30; $i++) {
             $roomFacilities = array_rand(array_flip($facilities), rand(1, 3));
@@ -32,7 +32,7 @@
             $rooms[] = [
                 'id' => $i,
                 'name' => 'Room ' . chr(64 + ($i % 26 + 1)), // This will cycle through A-Z
-                'location' => (($i % 5) + 1) . ord('st') . ' Floor',
+                'location' => (($i % 3) + 1) . ord('st') . ' Floor',
                 'capacity' => rand(5, 50),
                 'facilities' => implode(', ', $roomFacilities)
             ];
@@ -65,7 +65,6 @@
             <table class="table table-striped mt-3 align-middle">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Location</th>
                         <th>Capacity</th>
@@ -76,14 +75,13 @@
                 <tbody>
                     <?php foreach ($paginatedRooms as $room): ?>
                         <tr>
-                            <td><?php echo $room['id']; ?></td>
                             <td><?php echo $room['name']; ?></td>
                             <td><?php echo $room['location']; ?></td>
                             <td><?php echo $room['capacity']; ?></td>
                             <td><?php echo $room['facilities']; ?></td>
                             <td class='action-column'>
                                 <div class='action-buttons'>
-                                    <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editRoomModal' data-room-id='<?php echo $room['id']; ?>'>Edit</button>
+                                    <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editRoomModal' data-room-id='<?php echo $room['id']; ?>'>Edit</button>
                                     <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteRoomModal' data-room-id='<?php echo $room['id']; ?>'>Delete</button>
                                 </div>
                             </td>
@@ -145,7 +143,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-dark">Add Room</button>
+                    <button type="button" class="btn btn-success">Add Room</button>
                 </div>
             </div>
         </div>
@@ -182,7 +180,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-danger" onclick="saveRoomChanges()">Save Changes</button>
+                    <button type="button" class="btn btn-success" onclick="saveRoomChanges()">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -220,7 +218,7 @@
             var modalTitle = editRoomModal.querySelector('.modal-title')
             var roomIdInput = editRoomModal.querySelector('#editRoomId')
 
-            modalTitle.textContent = 'Edit Room ' + roomId
+            modalTitle.textContent = 'Edit Room'
             roomIdInput.value = roomId
 
             // Here you would typically fetch the room data and populate the form
@@ -240,9 +238,9 @@
             var roomIdInput = deleteRoomModal.querySelector('#deleteRoomId')
             var roomNameElement = deleteRoomModal.querySelector('#deleteRoomName')
 
-            modalTitle.textContent = 'Delete Room ' + roomId
+            modalTitle.textContent = 'Delete Room'
             roomIdInput.value = roomId
-            roomNameElement.textContent = 'Boardroom A' // Replace with actual room name
+            roomNameElement.innerHTML = 'Name: Boardroom A<br>Location: 1st Floor<br>Capacity: 20<br>Facilities: Projector, Whiteboard';  // Replace with actual room name
 
             // Here you would typically fetch the room data to display the name
             // For this example, we're using a placeholder name

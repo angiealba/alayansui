@@ -79,6 +79,7 @@
 <body>
 <?php include 'SAnavbar.php'; ?>
 <div class="container mt-5">
+<h1 class="fw-bold mb-3">Admins</h1>
     <div class="d-flex justify-content-between mb-3">
         <!-- Button Group -->
         <div class="button-group">
@@ -95,7 +96,7 @@
             </div>
             <!-- Add Account Button -->
             <button class="btn btn-dark" type="button" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                Add Account
+                Add Admin
             </button>
         </div>
 
@@ -104,7 +105,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addUserModalLabel">Add Account</h5>
+                <h5 class="modal-title" id="addUserModalLabel">Add Admin</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -118,14 +119,6 @@
                         <input type="email" class="form-control" id="userEmail" required>
                     </div>
                     <div class="mb-3">
-                        <label for="userRole" class="form-label">Select Role</label>
-                        <select class="form-select" id="userRole" required>
-                            <option value="" disabled selected>Select Role</option>
-                            <option value="User">User</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
                         <label for="userPassword" class="form-label">Password</label>
                         <input type="password" class="form-control" id="userPassword" required>
                     </div>
@@ -133,17 +126,67 @@
             </div>
             <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-dark">Add Account</button>
+                    <button type="submit" class="btn btn-success">Add Admin</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="hidden" id="editUserId">
+                        <div class="mb-3">
+                            <label for="editUserName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editUserName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editUserEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editUserEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editUserPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="editUserPassword" placeholder="Leave blank to keep current password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this admin?</p>
+                    <p class="fw-bold" id="deleteUserName"></p>
+                    <input type="hidden" id="deleteUserId">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete Admin</button>
+                </div>
+            </div>
+        </div>
+    </div>
             <!-- Search Bar -->
             <div class="input-group" style="width: 300px;">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search users...">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search admins">
                 <button class="btn btn-outline-secondary" type="button" onclick="searchTable()">Search</button>
             </div>
         </div>
@@ -152,41 +195,37 @@
             <table class="table table-striped mt-3 align-middle" id="userTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
                         <th class="action-column">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="userTableBody">
                 <?php
     $users = [
-        ['John Doe', 'user1@user.com', 'User'],
-        ['John Did', 'admin1@admin.com', 'Admin'],
-        ['John Done', 'user2@user.com', 'User'],
-        ['John Dont', 'admin2@admin.com', 'Admin'],
-        ['John Didnt', 'user3@user.com', 'User'],
-        ['Mark Doe', 'admin3@admin.com', 'Admin'],
-        ['Mark Did', 'user4@user.com', 'User'],
-        ['Mark Done', 'admin4@admin.com', 'Admin'],
-        ['Mark Dont', 'user5@user.com', 'User'],
-        ['Mark Didnt', 'admin5@admin.com', 'Admin'],
+        ['John Doe', 'admin1@admin.com'],
+        ['John Did', 'admin2@admin.com'],
+        ['John Done', 'admin3@admin.com'],
+        ['John Dont', 'admin4@admin.com'],
+        ['John Didnt', 'admin5@admin.com'],
+        ['Mark Doe', 'admin6@admin.com'],
+        ['Mark Did', 'admin7@admin.com'],
+        ['Mark Done', 'admin8@admin.com'],
+        ['Mark Dont', 'admin9@admin.com'],
+        ['Mark Didnt', 'admin12@admin.com'],
     ];
 
     foreach ($users as $index => $user) {
         $id = $index + 1;
         $name = $user[0];
         $email = $user[1];
-        $role = $user[2];
         echo "<tr>
-            <td>$id</td>
             <td>$name</td>
             <td>$email</td>
-            <td>$role</td>
+            
             <td class='action-column'>
                 <div class='action-buttons'>
-                    <button class='btn btn-outline-danger btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='$id'>Edit</button>
+                    <button class='btn btn-outline-secondary btn-sm' data-bs-toggle='modal' data-bs-target='#editUserModal' data-user-id='$id'>Edit</button>
                     <button class='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target='#deleteUserModal' data-user-id='$id'>Delete</button>
                 </div>
             </td>
@@ -207,6 +246,21 @@
     </div>
 
     <script>
+        // JavaScript to handle populating the delete modal with user data
+        var deleteUserModal = document.getElementById('deleteUserModal')
+        deleteUserModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            var userId = button.getAttribute('data-user-id')
+            var modalTitle = deleteUserModal.querySelector('.modal-title')
+            var userIdInput = deleteUserModal.querySelector('#deleteUserId')
+            var userNameElement = deleteUserModal.querySelector('#deleteUserName')
+
+            modalTitle.textContent = 'Delete Admin'
+            userIdInput.value = userId
+            userNameElement.innerHTML = 'Name: John Doe<br>Email: admin1@admin.com'; // Replace with actual user name
+            // Here you would typically fetch the user data to display the name
+            // For this example, we're using a placeholder name
+        })
         let currentPage = 1;
         const rowsPerPage = 5;
         const table = document.getElementById('userTable');
@@ -265,9 +319,28 @@
             }
             updatePaginationControls(); // Update pagination after filtering
         }
-
+        
         // Initial display of rows and pagination controls
         displayRows();
+        var editUserModal = document.getElementById('editUserModal')
+        editUserModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+            var userId = button.getAttribute('data-user-id')
+            var modalTitle = editUserModal.querySelector('.modal-title')
+            var userIdInput = editUserModal.querySelector('#editUserId')
+
+            modalTitle.textContent = 'Edit Admin'
+            userIdInput.value = userId
+
+            // Here you would typically fetch the user data and populate the form
+            // For this example, we'll just set some placeholder data
+            editUserModal.querySelector('#editUserName').value = 'John Doe'
+            editUserModal.querySelector('#editUserEmail').value = 'admin1@admin.com'
+            //editUserModal.querySelector('#editUserRole').value = 'User'
+            editUserModal.querySelector('#editUserPassword').value = ''
+        })
+        
+        
     </script>
 
 </body>

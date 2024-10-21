@@ -17,22 +17,15 @@
 
         // Sample booking data
         $bookings = [
-            ['id' => 1, 'room' => 'Conference Room B', 'date' => '2023-05-15', 'time' => '09:00 AM', 'duration' => 2],
-            ['id' => 2, 'room' => 'Meeting Room C', 'date' => '2023-05-16', 'time' => '11:00 AM', 'duration' => 1],
-            ['id' => 3, 'room' => 'BoardRoom A', 'date' => '2023-05-17', 'time' => '01:30 PM', 'duration' => 3],
-            ['id' => 4, 'room' => 'Training Room', 'date' => '2023-05-18', 'time' => '03:30 PM', 'duration' => 1],
-            ['id' => 5, 'room' => 'Executive Suite', 'date' => '2023-05-19', 'time' => '05:00 PM', 'duration' => 4],
+            ['id' => '0001', 'room' => 'Conference Room B', 'date' => '2023-05-15', 'time' => '09:00 AM', 'duration' => 2, 'repeat' => 'Weekly'],
+            ['id' => '0002', 'room' => 'Meeting Room C', 'date' => '2023-05-16', 'time' => '11:00 AM', 'duration' => 1, 'repeat' => 'Monthly'],
+            ['id' => '0003', 'room' => 'BoardRoom A', 'date' => '2023-05-17', 'time' => '01:30 PM', 'duration' => 3, 'repeat' => 'None'],
+            ['id' => '0004', 'room' => 'Training Room', 'date' => '2023-05-18', 'time' => '03:30 PM', 'duration' => 1, 'repeat' => 'Monthly'],
+            ['id' => '0005', 'room' => 'Executive Suite', 'date' => '2023-05-19', 'time' => '05:00 PM', 'duration' => 4, 'repeat' => 'None'],
+            ['id' => '0006', 'room' => 'Conference Room A', 'date' => '2023-05-20', 'time' => '02:00 PM', 'duration' => 2, 'repeat' => 'None'],
         ];
 
-        for ($i = 6; $i <= 50; $i++) {
-            $bookings[] = [
-                'id' => $i,
-                'room' => 'Room ' . chr(64 + ($i % 5 + 1)),
-                'date' => date('Y-m-d', strtotime("+$i days")),
-                'time' => date('h:i A', strtotime("+$i hours")),
-                'duration' => rand(1, 4)
-            ];
-        }
+        
 
         $filteredBookings = array_filter($bookings, function($booking) use ($search) {
             return empty($search) || 
@@ -57,38 +50,32 @@
                 <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
         </div>
-        <div class="table-responsive">
-            <table class="table table-striped mt-3 align-middle">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Room</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                        <th class="action-column">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($paginatedBookings as $booking): ?>
-                        <tr>
-                            <td><?php echo $booking['id']; ?></td>
-                            <td><?php echo $booking['room']; ?></td>
-                            <td><?php echo $booking['date']; ?></td>
-                            <td><?php echo $booking['time']; ?></td>
-                            <td><?php echo $booking['duration'] . ' ' . ($booking['duration'] > 1 ? 'hours' : 'hour'); ?></td>
-                            <td class="action-column">
-                                <div class="action-buttons">
-                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#editBookingModal" data-booking-id="<?php echo $booking['id']; ?>">Edit</button>
-                                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteBookingModal" data-booking-id="<?php echo $booking['id']; ?>">Cancel</button>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+              <!-- Card View for Bookings -->
+              <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+            <?php foreach ($paginatedBookings as $booking): ?>
+                <div class="col">
+                    <div class="card h-100 border-1 shadow-sm bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-3"><strong>Room: <?php echo $booking['room']; ?></strong></h5>
+                            <hr />
+                            <p class="card-text mb-2"><strong>Date:</strong> <?php echo $booking['date']; ?></p>
+                            <p class="card-text mb-2"><strong>Time:</strong> <?php echo $booking['time']; ?></p>
+                            <p class="card-text mb-2"><strong>Duration:</strong> <?php echo $booking['duration'] . ' ' . ($booking['duration'] > 1 ? 'hours' : 'hour'); ?></p>
+                            <p class="card-text mb-2"><strong>Repeat: </strong><?php echo $booking['repeat']; ?></p>
+                            <p class="card-text mb-2">Booking ID: <?php echo $booking['id']; ?></p>
+                        </div>
+                        <div class="card-footer bg-white d-flex justify-content-between align-items-center border-top">
+                            <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#editBookingModal" data-booking-id="<?php echo $booking['id']; ?>">
+                                <i class="bi bi-pencil"></i> Edit
+                            </button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteBookingModal" data-booking-id="<?php echo $booking['id']; ?>">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
-    </div>
 
     <!-- Pagination -->
     <nav aria-label="Booking table navigation">
@@ -170,7 +157,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-dark">Book Room</button>
+                    <button type="button" class="btn btn-success">Book Room</button>
                 </div>
             </div>
         </div>
@@ -259,7 +246,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-dark" >Update Booking</button>
+                    <button type="button" class="btn btn-success" >Update Booking</button>
                 </div>
             </div>
         </div>
@@ -321,7 +308,7 @@
             var modalTitle = editBookingModal.querySelector('.modal-title')
             var bookingIdInput = editBookingModal.querySelector('#editBookingId')
 
-            modalTitle.textContent = 'Edit Booking ' + bookingId
+            modalTitle.textContent = 'Edit Booking ID: ' + bookingId
             bookingIdInput.value = bookingId
 
             // Here you would typically fetch the booking data and populate the form
@@ -342,7 +329,7 @@
             var bookingDetails = deleteBookingModal.querySelector('#cancelBookingDetails')
             var cancelRecurringOptions = deleteBookingModal.querySelector('#cancelRecurringOptions')
 
-            modalTitle.textContent = 'Cancel Booking ' + bookingId
+            modalTitle.textContent = 'Cancel Booking ID: ' + bookingId
             bookingIdInput.value = bookingId
 
             // Here you would typically fetch the booking data and populate the details

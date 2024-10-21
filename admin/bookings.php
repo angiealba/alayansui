@@ -15,25 +15,26 @@
             $currentPage = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
             $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-            // Sample booking data
-            $bookings = [
-                ['id' => 1, 'room' => 'Conference Room B', 'name' => 'John Doe', 'date' => '2023-05-15', 'time' => '09:00 AM', 'duration' => 2],
-                ['id' => 2, 'room' => 'Meeting Room C', 'name' => 'Jane Doe', 'date' => '2023-05-16', 'time' => '11:00 AM', 'duration' => 1],
-                ['id' => 3, 'room' => 'BoardRoom A', 'name' => 'John Smith', 'date' => '2023-05-17', 'time' => '01:30 PM', 'duration' => 3],
-                ['id' => 4, 'room' => 'Training Room', 'name' => 'Jane Smith', 'date' => '2023-05-18', 'time' => '03:30 PM', 'duration' => 1],
-                ['id' => 5, 'room' => 'Executive Suite', 'name' => 'John Doe', 'date' => '2023-05-19', 'time' => '05:00 PM', 'duration' => 4],
-            ];
-
-            for ($i = 6; $i <= 50; $i++) {
-                $bookings[] = [
-                    'id' => $i,
-                    'room' => 'Room ' . chr(64 + ($i % 5 + 1)),
-                    'name' => 'John Doe',
-                    'date' => date('Y-m-d', strtotime("+$i days")),
-                    'time' => date('h:i A', strtotime("+$i hours")),
-                    'duration' => rand(1, 4)
+                // Sample booking data
+                $bookings = [
+                    ['id' => '0001', 'room' => 'Conference Room B', 'name' => 'John Doe', 'date' => '2023-05-15', 'time' => '09:00 AM', 'duration' => 2],
+                    ['id' => '0002', 'room' => 'Meeting Room C', 'name' => 'Jane Doe', 'date' => '2023-05-16', 'time' => '11:00 AM', 'duration' => 1],
+                    ['id' => '0003', 'room' => 'BoardRoom A', 'name' => 'John Smith', 'date' => '2023-05-17', 'time' => '01:30 PM', 'duration' => 3],
+                    ['id' => '0004', 'room' => 'Training Room', 'name' => 'Jane Smith', 'date' => '2023-05-18', 'time' => '03:30 PM', 'duration' => 1],
+                    ['id' => '0005', 'room' => 'Executive Suite', 'name' => 'John Doe', 'date' => '2023-05-19', 'time' => '05:00 PM', 'duration' => 4],
                 ];
-            }
+
+                // Generate additional bookings with consistent ID format
+                for ($i = 6; $i <= 50; $i++) {
+                    $bookings[] = [
+                        'id' => str_pad($i, 4, '0', STR_PAD_LEFT), // Formats the ID to be 4 digits, e.g., '0006', '0007'
+                        'room' => 'Room ' . chr(64 + ($i % 5 + 1)),
+                        'name' => 'John Doe',
+                        'date' => date('Y-m-d', strtotime("+$i days")),
+                        'time' => date('h:i A', strtotime("+$i hours")),
+                        'duration' => rand(1, 4)
+                    ];
+                }
 
             $filteredBookings = array_filter($bookings, function($booking) use ($search) {
                 return empty($search) || 
@@ -76,7 +77,7 @@
                             <input type="text" class="form-control" id="filterUser" placeholder="Enter user name">
                         </div>
                         <div class="col-md-3 d-flex align-items-end">
-                            <button type="button" class="btn btn-danger me-2" onclick="applyFilter()">Apply Filter</button>
+                            <button type="button" class="btn btn-success me-2" onclick="applyFilter()">Apply Filter</button>
                             <button type="button" class="btn btn-secondary" onclick="resetFilter()">Reset</button>
                         </div>
                     </form>

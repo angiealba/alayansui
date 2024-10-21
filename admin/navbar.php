@@ -17,9 +17,6 @@
                 <li class="nav-item">
                     <a class="nav-link text-light" href="/alayans/admin/bookings.php">BOOKINGS</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/alayans/admin/analytics.php">REPORTING & ANALYTICS</a>
-                </li>
                 <li class="nav-item d-lg-none">
                     <a class="nav-link text-light" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
